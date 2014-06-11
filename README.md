@@ -3,15 +3,19 @@ swear_jar_bot
 
 ### Dependencies
 
-1. Uses the [PRAW library](https://praw.readthedocs.org) to interact with [Reddit's API](https://github.com/reddit/reddit/wiki/API).
+* `pip`
+* `virtualenv`
+* `python 2.7.6`
 
-2. Uses sqlite3.
+### Before you Run
 
-3. I'm using python version 2.7.6 but you can probably use other versions.
-
-3. Need to make a sinner.db before running main.py
+Need to make a sinner.db before running main.py
   * Using Reddit username for keyvalue and INT to keep track of the user's swears.
-  * The web app will interact with this database as well.
+  * The web app will interact with this database as well. (more info on seeding DB later...)
+
+### Run
+
+`make run`
 
 ### To-Do
 
