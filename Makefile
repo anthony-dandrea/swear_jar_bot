@@ -7,8 +7,11 @@ virtual-env:
 env: virtual-env
 	$(ENV)/bin/pip install -r requirements/base.txt
 
-run: env
+run_bot: env
 	$(ENV)/bin/python main.py
+
+run_app: env
+	$(ENV)/bin/python app.py
 
 clean:
 	rm -rf $(ENV)
