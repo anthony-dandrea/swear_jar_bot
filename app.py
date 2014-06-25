@@ -1,3 +1,6 @@
+import os
+import sqlite3
+
 from flask import Flask, render_template, request, g
 
 app = Flask(__name__)
@@ -21,7 +24,7 @@ def connect_db():
     """Connects to the specific database."""
     rv = sqlite3.connect(app.config['DATABASE']) # Note DATABASE config attr, above
     rv.row_factory = sqlite3.Row
-return rv
+    return rv
 
 def get_db():
     """Opens a new database connection if there is none yet for the
@@ -45,21 +48,22 @@ def index():
     if user:
         db = get_db()
         # Placeholder SQL statement because I don't know shit
-        cur = db.execute('SELECT comment FROM comments WHERE user == {} AND paid == false'.format(user))
+        cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
         comments = cur.fetchall()
     else:
         comments = None
 
     return render_template('index.html', user=user, comments=comments)
 
-@app.route('/add_comment', methods=['POST'])
-def add_comment_api():
-    # TODO add some authentication that only swearbot knows about
-    db = get_db()
-    db.execute('INSERT INTO comments (user, comment) VALUES (?, ?)',
-                    [user???, comment???]) # <-- figure out request format
-    db.commit()
-    # TODO return some json response to the bot?
+# TODO: If we want to add_comment api shit, we can do that here
+#@app.route('/add_comment', methods=['POST'])
+#def add_comment_api():
+#    # TODO add some authentication that only swearbot knows about
+#    db = get_db()
+#    db.execute('INSERT INTO comments (user, comment) VALUES (?, ?)',
+#                    [user???, comment???]) # <-- figure out request format
+#    db.commit()
+#    # TODO return some json response to the bot?
 
 
 if __name__ == '__main__':
