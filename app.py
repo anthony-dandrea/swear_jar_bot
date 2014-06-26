@@ -9,7 +9,7 @@ app.config.from_object(__name__)
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'sinners.db'), # TODO <--- DB name?
+    DATABASE=os.path.join(app.root_path, 'test_sinners.db'), # TODO <--- DB name?
     DEBUG=True,
     SECRET_KEY='development key', # Do we care?
     USERNAME='admin',
@@ -46,12 +46,17 @@ def index():
     user = request.args.get('user', None)
 
     if user:
+        print('User found: {}'.format(user))
         db = get_db()
         # Placeholder SQL statement because I don't know shit
         cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
-        comments = cur.fetchall()
+        comments = [comment[0] for comment in cur.fetchall()]
+        print('Comments found under user:')
+        for comment in comments:
+            print('{}'.format(comment))
     else:
-        comments = None
+        print('No user found')
+        comments = []
 
     return render_template('index.html', user=user, comments=comments)
 

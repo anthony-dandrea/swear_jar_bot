@@ -7,10 +7,10 @@ virtual-env:
 env: virtual-env
 	$(ENV)/bin/pip install -r requirements/base.txt
 
-run_bot: env
+run_bot: 
 	$(ENV)/bin/python main.py
 
-run_app: env
+run_app:
 	$(ENV)/bin/python app.py
 
 clean:
