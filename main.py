@@ -38,7 +38,7 @@ def main():
 					# Add this new sinner to santa's naughty list
 					cur.execute("INSERT INTO Sinners VALUES(?,?)", (author,1))
 
-					# comment.reply('')
+					# comment.reply('You just swore! Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % author
 
 
 				### User exists, need to update ###
@@ -51,7 +51,7 @@ def main():
 					# Tack another one on for this guy
 					cur.execute("UPDATE Sinners SET Count=? WHERE User=?", (swear_count, author))
 
-					# comment.reply('You swore %s time(s). Pay for your sins by going to http://swearjar.com' % swear_count)
+					# comment.reply('You just swore! I've caught you %s times. Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % (swear_count, author)
 
 
 				# Close connection - Not sure when the fuck to close this connection.
