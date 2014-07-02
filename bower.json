@@ -1,0 +1,25 @@
+{
+  "name": "swear_jar_bot",
+  "version": "1.0.0",
+  "homepage": "https://github.com/anthony-dandrea/swear_jar_bot",
+  "authors": [
+    "Rodney Dennis",
+    "Anthony D'andrea",
+    "Sean Dennison",
+    "Renier Soto"
+  ],
+  "description": "A Reddit bot for catching sinners",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "modernizr": "~2.8.2",
+    "normalize-scss": "~3.0.1",
+    "jquery": "~2.1.1"
+  }
+}
