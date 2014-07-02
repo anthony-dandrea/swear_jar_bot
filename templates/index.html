@@ -10,10 +10,10 @@
   <body>
     <h1>Swear Jar</h1>
     <h2>We don't play that shit</h2>
-    <form>
-      <label>Username</label>
-      <input type="text" name="user"><br>
-      <input type="submit" value="Submit">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.name.label }} {{ form.name(id='my-text-field') }}
+      {{ form.submit() }}
     </form>
   </body>
 
