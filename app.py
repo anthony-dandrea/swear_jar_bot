@@ -64,6 +64,12 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
+def get_comments(user):
+    db = get_db()
+    # Placeholder SQL statement because I don't know shit
+    cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
+    return [comment[0] for comment in cur.fetchall()]
+
 ########
 # Forms
 ########
@@ -80,24 +86,24 @@ def index():
     form = NameForm()
     if form.validate_on_submit():
         user = form.name.data
+        print('User found: {}'.format(user))
 
-        if user:
-            print('User found: {}'.format(user))
-            db = get_db()
-            # Placeholder SQL statement because I don't know shit
-            cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
-            session['comments'] = [comment[0] for comment in cur.fetchall()]
-            print('Comments found under user:')
-            for comment in session['comments']:
-                print('{}'.format(comment))
-        else:
-            print('No user found')
-            session['comments'] = []
+        session['comments'] = get_comments(user)
+        print('Comments found under user:')
+        for comment in session['comments']:
+            print('{}'.format(comment))
         session['name'] = form.name.data
         form.name.data = ''
         return redirect(url_for('index'))
 
     return render_template('index.html', form=form, user=session.get('name'), comments=session.get('comments'))
+
+@app.route('/user/<user>')
+def redirect_with_user(user):
+    # show the user profile for that user
+    session['name'] = user
+    session['comments'] = get_comments(user)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
