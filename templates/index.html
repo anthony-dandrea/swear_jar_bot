@@ -1,20 +1,33 @@
 <!doctype html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Swear Jar</title>
+    <script type="text/javascript" src="../assets/bower_components/modernizr/modernizr.js"></script>
+    <title>Swear Jar Bot</title>
   </head>
 
   <body>
-    <h1>Swear Jar</h1>
-    <h2>We don't play that shit</h2>
+    <h1>Swear Jar Bot</h1>
+
+    <h2>Who the fuck we are: </h2>
+    <p>We are the watchers on the wall. We know what you said last summer. You're a fucking potty mouth&mdash;shut the fuck up.</p>
+
+    <h2>Who the fuck are you? </h2>
     <form method="POST">
       {{ form.hidden_tag() }}
       {{ form.name.label }} {{ form.name(id='my-text-field') }}
       {{ form.submit() }}
     </form>
+
+    {{ user }}
+
+    {% for comment in comments %}
+      {{ comment }}
+    {% endfor %}
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="../assets/bower_components/jquery/dist/jquery.min.js"></script>
   </body>
 
 </html>
