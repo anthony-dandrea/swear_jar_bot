@@ -19,7 +19,6 @@
   ],
   "dependencies": {
     "modernizr": "~2.8.2",
-    "normalize-scss": "~3.0.1",
-    "jquery": "~2.1.1"
+    "normalize-scss": "~3.0.1"
   }
 }

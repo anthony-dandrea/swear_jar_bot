@@ -3,30 +3,49 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/main.css">
     <script type="text/javascript" src="/static/bower_components/modernizr/modernizr.js"></script>
     <title>Swear Jar Bot</title>
   </head>
   <body>
-    <h1>Swear Jar Bot</h1>
-    <h2>Who the fuck we are: </h2>
-    <p>
-      We are the watchers on the wall. We know what you said last summer. You're a fucking potty mouth&mdash;shut the fuck u
-    </p>
-    <h2>Who the fuck are you? </h2>
-    <form action="/?user={{ user }}">
-      <input type="text" name="user" placeholder="">
-      <input type="submit" value="Submit">
-    </form>
-
-    {{ user }}
-
-    {% for comment in comments %}
-      {{ comment }}
-    {% endfor %}
-
+    <div class="container">
+      <h1 class="title">Swear Jar Bot</h1>
+      <hr>
+      <h2 class="text-center">Who the fuck we are.</h2>
+      <p>
+        We exist for the sole purpose of collecting the debt owed to society by the fowl-mouthed masses for their defamatory comments and lunguistic tomfuckery.
+      </p>
+      <h2 class="text-center">Who the fuck are you? </h2>
+      <form action="/?user={{ user }}">
+        <label>Username</label>
+        <input type="text" name="user" placeholder="">
+        <button class="btn" type="submit">
+          Submit <i class="fa fa-angle-right"></i>
+        </button>
+      </form>
+      {% if user %}
+        <h2 class="text-center">
+          {{ user }}
+          <small>&bull;</small>
+          {% if comments|length == 0 %}
+            No violations
+          {% elif comments|length == 1 %}
+            {{ comments|length }} violation
+          {% else %}
+            {{ comments|length }} violations
+          {% endif %}
+        </h2>
+        {% for comment in comments %}
+          <div class="comment">
+            <i class="fa fa-quote-left"></i>
+            <p>{{ comment }}</p>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
     <!-- Scripts -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="static/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/static/scripts/main.js"></script>
   </body>
-
 </html>
