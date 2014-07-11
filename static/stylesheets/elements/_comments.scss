@@ -1,0 +1,12 @@
+.comment {
+  display: table;
+  margin-bottom: $unit;
+  i {
+    display: table-cell;
+    padding-right: $unit-s;
+  }
+  p {
+    display: table-cell;
+    margin: 0;
+  }
+}
