@@ -21,11 +21,7 @@
         {{ form.hidden_tag() }}
         <label>Username</label>
         {{ form.name(id='my-text-field')}}
-        <!-- <input type="text" name="user" placeholder=""> -->
         {{ form.submit(class='btn')}}
-        <!--<button class="btn" type="submit">
-          Submit <i class="fa fa-angle-right"></i>
-        </button> -->
       </form>
       {% if user %}
         <h2 class="text-center">
