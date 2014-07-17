@@ -2,11 +2,16 @@
   display: table;
   margin-bottom: $unit;
   i {
-    display: table-cell;
+    display: inline;
+  }
+  .fa-quote-left {
     padding-right: $unit-s;
   }
+  .fa-quote-right {
+    padding-left: $unit-s;
+  }
   p {
-    display: table-cell;
+    display: inline;
     margin: 0;
   }
 }

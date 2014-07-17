@@ -1,3 +1,4 @@
 praw
 Flask
+flask-wtf
 flask-assets
