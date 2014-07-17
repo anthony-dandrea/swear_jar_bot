@@ -17,12 +17,15 @@
         We exist for the sole purpose of collecting the debt owed to society by the fowl-mouthed masses for their defamatory comments and lunguistic tomfuckery.
       </p>
       <h2 class="text-center">Who the fuck are you? </h2>
-      <form action="/?user={{ user }}">
+      <form method="POST">
+        {{ form.hidden_tag() }}
         <label>Username</label>
-        <input type="text" name="user" placeholder="">
-        <button class="btn" type="submit">
+        {{ form.name(id='my-text-field')}}
+        <!-- <input type="text" name="user" placeholder=""> -->
+        {{ form.submit(class='btn')}}
+        <!--<button class="btn" type="submit">
           Submit <i class="fa fa-angle-right"></i>
-        </button>
+        </button> -->
       </form>
       {% if user %}
         <h2 class="text-center">
@@ -40,10 +43,12 @@
           <div class="comment">
             <i class="fa fa-quote-left"></i>
             <p>{{ comment }}</p>
+            <i class="fa fa-quote-right"></i>
           </div>
         {% endfor %}
       {% endif %}
     </div>
+
     <!-- Scripts -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/static/scripts/main.js"></script>

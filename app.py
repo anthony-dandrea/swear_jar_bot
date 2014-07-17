@@ -1,6 +1,12 @@
 import os
 import sqlite3
-from flask import Flask, render_template, request, g
+
+from flask import Flask, render_template, request, g, session, redirect, url_for
+from flask.ext.wtf import Form
+from flask.ext import assets
+
+from wtforms import StringField, SubmitField
+from wtforms.validators import Required
 
 app = Flask(__name__)
 
@@ -39,35 +45,46 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
-@app.route('/')
+def get_comments(user):
+    db = get_db()
+    # Placeholder SQL statement because I don't know shit
+    cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
+    return [comment[0] for comment in cur.fetchall()]
+
+########
+# Forms
+########
+class NameForm(Form):
+    name = StringField('What yo name?', validators=[Required()])
+    submit = SubmitField('Submit')
+
+########
+# Routes
+########
+@app.route('/', methods=['GET', 'POST'])
 def index():
     # here we want to get the value of user (i.e. ?user=some-value)
-    user = request.args.get('user', None)
-
-    if user:
+    form = NameForm()
+    if form.validate_on_submit():
+        user = form.name.data
         print('User found: {}'.format(user))
-        db = get_db()
-        # Placeholder SQL statement because I don't know shit
-        cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
-        comments = [comment[0] for comment in cur.fetchall()]
+
+        session['comments'] = get_comments(user)
         print('Comments found under user:')
-        for comment in comments:
+        for comment in session['comments']:
             print('{}'.format(comment))
-    else:
-        print('No user found')
-        comments = []
+        session['name'] = form.name.data
+        form.name.data = ''
+        return redirect(url_for('index'))
 
-    return render_template('index.html', user=user, comments=comments)
+    return render_template('index.html', form=form, user=session.get('name'), comments=session.get('comments'))
 
-# TODO: If we want to add_comment api shit, we can do that here
-#@app.route('/add_comment', methods=['POST'])
-#def add_comment_api():
-#    # TODO add some authentication that only swearbot knows about
-#    db = get_db()
-#    db.execute('INSERT INTO comments (user, comment) VALUES (?, ?)',
-#                    [user???, comment???]) # <-- figure out request format
-#    db.commit()
-#    # TODO return some json response to the bot?
+@app.route('/user/<user>')
+def redirect_with_user(user):
+    # show the user profile for that user
+    session['name'] = user
+    session['comments'] = get_comments(user)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
