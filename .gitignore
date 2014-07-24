@@ -3,3 +3,5 @@
 config.py
 .DS_Store
 env/
+static/bower_components/
+.sass-cache/

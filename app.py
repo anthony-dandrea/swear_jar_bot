@@ -1,14 +1,18 @@
 import os
 import sqlite3
+import praw
 
 from random import choice
 
 from flask import Flask, render_template, request, g, session, redirect, url_for
 from flask.ext.wtf import Form
+from flask.ext import assets
+
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 
 app = Flask(__name__)
+
 app.config.from_object(__name__)
 
 # Load default config and override config from an environment variable
@@ -44,6 +48,12 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
+def get_comments(user):
+    db = get_db()
+    # Placeholder SQL statement because I don't know shit
+    cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
+    return [comment[0] for comment in cur.fetchall()]
+
 ########
 # Forms
 ########
@@ -64,19 +74,12 @@ def index():
     form = NameForm()
     if form.validate_on_submit():
         user = form.name.data
+        print('User found: {}'.format(user))
 
-        if user:
-            print('User found: {}'.format(user))
-            db = get_db()
-            # Placeholder SQL statement because I don't know shit
-            cur = db.execute('SELECT swear_comment FROM comments WHERE user = "{}" AND paid = 0'.format(user))
-            session['comments'] = [comment[0] for comment in cur.fetchall()]
-            print('Comments found under user:')
-            for comment in session['comments']:
-                print('{}'.format(comment))
-        else:
-            print('No user found')
-            session['comments'] = []
+        session['comments'] = get_comments(user)
+        print('Comments found under user:')
+        for comment in session['comments']:
+            print('{}'.format(comment))
         session['name'] = form.name.data
         form.name.data = ''
         return redirect(url_for('index'))
