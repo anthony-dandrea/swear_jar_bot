@@ -2,6 +2,8 @@ import os
 import sqlite3
 import praw
 
+from random import choice
+
 from flask import Flask, render_template, request, g, session, redirect, url_for
 from flask.ext.wtf import Form
 from flask.ext import assets
@@ -59,6 +61,10 @@ class NameForm(Form):
     name = StringField('What yo name?', validators=[Required()])
     submit = SubmitField('Submit')
 
+class SwearJarForm(Form):
+    cc_num = StringField('What yo name?', validators=[Required()])
+    cc_exp = StringField('What yo name?', validators=[Required()])
+
 ########
 # Routes
 ########
@@ -87,6 +93,15 @@ def redirect_with_user(user):
     session['comments'] = get_comments(user)
     return redirect(url_for('index'))
 
+@app.route('/random')
+def redirect_with_random_user():
+    db = get_db()
+    # Placeholder SQL statement because I don't know shit
+    cur = db.execute('SELECT user FROM comments')
+    user = choice(cur.fetchall())[0]
+    session['name'] = user
+    session['comments'] = get_comments(user)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run()
