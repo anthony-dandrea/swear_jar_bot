@@ -4,6 +4,13 @@ import sqlite3 as lite
 import sys
 
 
+def get_comments_for_user( user_name, reddit ):
+    # this fuction returns all the comments for a user
+    reddit_user = reddit.get_redditor(user_name)
+    comments = reddit_user.get_comments()
+    return comments
+
+
 def main():
 
     swear_words = ['fuck', 'shit', 'bitch', 'cunt', 'asshole']
@@ -13,7 +20,6 @@ def main():
 
     # Get all comments
     all_comments = r.get_comments('all')
-
 
     # Get comments for testing
     for comment in all_comments:
