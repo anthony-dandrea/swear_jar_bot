@@ -5,8 +5,6 @@ import sys
 
 class Bot(object):
 
-
-
     def __init__(self):
         self.r = praw.Reddit(user_agent=config['user_agent'])
 
@@ -39,17 +37,17 @@ class Bot(object):
         # Get comments for testing
         for comment in comments:
             if any(s in comment.body.lower() for s in swear_words):
-                user = comment.author
-                swear_comment = comment.body
+                user = str(comment.author)
+                swear_comment = str(comment.body)
                 print "This dude swore: %s" % user
 
                 # Connect to DB
                 con = lite.connect('test_sinners.db')
                 #with con:
                 cur = con.cursor()
-                cur.execute('INSERT INTO comments VALUES(NULL,"{0}","{1}",0)'.format(user, swear_comment))
+                cur.execute('INSERT INTO comments VALUES(NULL,?,?,0)',[user, swear_comment])
 
-                cur.execute('SELECT COUNT(*) FROM comments WHERE user = "{}"'.format(user))
+                cur.execute('SELECT COUNT(*) FROM comments WHERE user = ?',[user])
                 con.commit()
                 swear_count = cur.fetchone()[0]
 
@@ -61,7 +59,7 @@ class Bot(object):
 
                 ### User exists, need to update ###
                 else:
-                    print "Existing user: %s \nOld swear count: %s" % (author, swear_count)
+                    print "Existing user: %s \nOld swear count: %s" % (user, swear_count)
 
                     # comment.reply('You just swore! I've caught you %s times. Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % (swear_count, author)
 
