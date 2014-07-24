@@ -23,6 +23,7 @@
         <input id="my-text-field" name="name" type="text" value="{{user}}">
         {{ form.submit(class='btn')}}
       </form>
+      <button type="submit" formmethod="get" formaction="{{ url_for('redirect_with_random_user') }}">Random Sinner</button>
       {% if user %}
         <h2 class="text-center">
           {{ user }}
