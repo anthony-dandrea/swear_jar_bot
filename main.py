@@ -3,56 +3,81 @@ from config import config
 import sqlite3 as lite
 import sys
 
-
-def get_comments_for_user( user_name, reddit ):
-    # this fuction returns all the comments for a user
-    reddit_user = reddit.get_redditor(user_name)
-    comments = reddit_user.get_comments()
-    return comments
+class Bot(object):
 
 
-def main():
 
-    swear_words = ['fuck', 'shit', 'bitch', 'cunt', 'asshole']
+    def __init__(self):
+        self.r = praw.Reddit(user_agent=config['user_agent'])
 
-    r = praw.Reddit(user_agent=config['user_agent'])
-    r.login(config['username'], config['password'])
+    def get_comments_for_user(self,user_name):
+        # this fuction returns all the comments for a user
+        reddit_user = self.r.get_redditor(user_name)
+        comments = reddit_user.get_comments()
+        return comments
 
-    # Get all comments
-    all_comments = r.get_comments('all')
+    def get_comments_for_all(self):
+        #this function returns all the comments on the first
+        #page of reddit
+        comments = self.r.get_comments('all')
+        return comments
 
-    # Get comments for testing
-    for comment in all_comments:
-        if any(s in comment.body.lower() for s in swear_words):
-            user = comment.author
-            swear_comment = comment.body
-            print "This dude swore: %s" % user
+    def run(self, comment_context):
 
-            # Connect to DB
-            con = lite.connect('test_sinners.db')
-            #with con:
-            cur = con.cursor()
-            cur.execute('INSERT INTO comments VALUES(NULL,"{0}","{1}",0)'.format(user, swear_comment))
+        swear_words = ['fuck', 'shit', 'bitch', 'cunt', 'asshole']
 
-            cur.execute('SELECT COUNT(*) FROM comments WHERE user = "{}"'.format(user))
-            con.commit()
-            swear_count = cur.fetchone()[0]
+        self.r.login(config['username'], config['password'])
 
-            if swear_count <= 1:
-                print "New user: %s" % user
-
-                # comment.reply('You just swore! Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % author
+        # get comments
+        if comment_context == 'all':
+            comments = self.get_comments_for_all()
+        else:
+            comments = self.get_comments_for_user(comment_context)
 
 
-            ### User exists, need to update ###
-            else:
-                print "Existing user: %s \nOld swear count: %s" % (author, swear_count)
 
-                # comment.reply('You just swore! I've caught you %s times. Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % (swear_count, author)
+        # Get comments for testing
+        for comment in comments:
+            if any(s in comment.body.lower() for s in swear_words):
+                user = comment.author
+                swear_comment = comment.body
+                print "This dude swore: %s" % user
+
+                # Connect to DB
+                con = lite.connect('test_sinners.db')
+                #with con:
+                cur = con.cursor()
+                cur.execute('INSERT INTO comments VALUES(NULL,"{0}","{1}",0)'.format(user, swear_comment))
+
+                cur.execute('SELECT COUNT(*) FROM comments WHERE user = "{}"'.format(user))
+                con.commit()
+                swear_count = cur.fetchone()[0]
+
+                if swear_count <= 1:
+                    print "New user: %s" % user
+
+                    # comment.reply('You just swore! Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % author
 
 
-            # Close connection - Not sure when the fuck to close this connection.
-            #    con.close()
+                ### User exists, need to update ###
+                else:
+                    print "Existing user: %s \nOld swear count: %s" % (author, swear_count)
+
+                    # comment.reply('You just swore! I've caught you %s times. Repent for your sins at [swearjarbot.com](swearjarbot.com/?user=%s).') % (swear_count, author)
+
+
+                # Close connection - Not sure when the fuck to close this connection.
+                #    con.close()
 
 if __name__ == '__main__':
-    main()
+
+
+
+    try: 
+        sys.argv[1]    
+    except IndexError:
+        print "you're a tard muffin"
+    else:
+        b = Bot()
+        b.run(sys.argv[1])
+
