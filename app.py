@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import praw
 
 from flask import Flask, render_template, request, g, session, redirect, url_for
 from flask.ext.wtf import Form

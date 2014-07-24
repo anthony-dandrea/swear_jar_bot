@@ -20,7 +20,7 @@
       <form method="POST">
         {{ form.hidden_tag() }}
         <label>Username</label>
-        {{ form.name(id='my-text-field')}}
+        <input id="my-text-field" name="name" type="text" value="{{user}}">
         {{ form.submit(class='btn')}}
       </form>
       {% if user %}
