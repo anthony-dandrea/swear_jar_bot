@@ -27,11 +27,11 @@ class Bot(object):
         self.r.login(config['username'], config['password'])
 
         # get comments
+        
         if comment_context == 'all':
             comments = self.get_comments_for_all()
         else:
             comments = self.get_comments_for_user(comment_context)
-
 
 
         # Get comments for testing
