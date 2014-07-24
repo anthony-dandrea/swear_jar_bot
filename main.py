@@ -18,17 +18,17 @@ def main():
     # Get comments for testing
     for comment in all_comments:
         if any(s in comment.body.lower() for s in swear_words):
-            user = comment.author
-            swear_comment = comment.body
+            user = str(comment.author)
+            swear_comment = str(comment.body)
             print "This dude swore: %s" % user
 
             # Connect to DB
             con = lite.connect('test_sinners.db')
             #with con:
             cur = con.cursor()
-            cur.execute('INSERT INTO comments VALUES(NULL,"{0}","{1}",0)'.format(user, swear_comment))
+            cur.execute('INSERT INTO comments VALUES(NULL,?,?,0)',[user, swear_comment])
 
-            cur.execute('SELECT COUNT(*) FROM comments WHERE user = "{}"'.format(user))
+            cur.execute('SELECT COUNT(*) FROM comments WHERE user = ?',[user])
             con.commit()
             swear_count = cur.fetchone()[0]
 
