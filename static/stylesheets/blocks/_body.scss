@@ -15,11 +15,26 @@ body {
   color: $color;
   font-family: $font-family;
   font-size: $font-size;
-  font-weight: $font-weight;
   line-height: $line-height;
 }
-.container {
-  margin: 0 auto;
-  max-width: 30em;
-  padding: $unit;
+.left-col {
+  @extend %container;
+  background: $color-gray-lighter;
+  width: 100%;
+  @include breakpoint ($small) {
+    height: 100%;
+    left: 0;
+    overflow: scroll;
+    position: fixed;
+    top: 0;
+    width: 35%;
+  }
+}
+.right-col {
+  @extend %container;
+  width: 100%;
+  @include breakpoint ($small) {
+    float: right;
+    width: 65%;
+  }
 }

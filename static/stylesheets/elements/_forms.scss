@@ -1,19 +1,17 @@
 input {
-  margin-bottom: $unit;
+  margin-bottom: $unit-s;
 }
-input[type*="text"] {
-  background: $blue-dark;
-  border: none;
-  color: $white;
+input[type="text"] {
+  background: $color-white;
+  border: $base-border;
+  border-radius: $base-border-radius;
+  font-size: 150%;
   display: block;
   outline: none;
   padding: $unit-s;
   width: 100%;
 }
 label {
-  font-family: $header-family;
-  font-size: 60%;
+  font-size: 80%;
   font-weight: bold;
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
