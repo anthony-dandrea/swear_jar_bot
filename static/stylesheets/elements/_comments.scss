@@ -6,7 +6,7 @@
   font-style: italic;
   margin-bottom: $unit;
   padding-bottom: $unit-s;
-  transition: 0.5s;
+  transition: $duration;
   width: 100%;
   &:hover {
     color: $color-black;

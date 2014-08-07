@@ -383,6 +383,9 @@ h6 {
   letter-spacing: 1px;
   line-height: 1; }
 
+a {
+  text-decoration: none; }
+
 .title {
   font-size: 4em;
   margin: 0 0 1rem; }
@@ -460,9 +463,19 @@ label {
   border-radius: 5px;
   color: #f8f8f8;
   outline: none;
-  padding: 0.5em 1em; }
+  padding: 0.5em 1em;
+  transition: 0.5s; }
   .button:hover {
     background: #1e8449; }
+
+.un-button {
+  color: #404040;
+  background: none;
+  padding-left: 0;
+  padding-right: 0; }
+  .un-button:hover {
+    background: none;
+    text-decoration: underline; }
 
 .comment {
   border-bottom: 1px solid silver;

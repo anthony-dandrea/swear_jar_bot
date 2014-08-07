@@ -23,8 +23,10 @@
       <form method="POST">
         {{ form.hidden_tag() }}
         <label>Enter Username</label>
-        {{ form.name(id='my-text-field') }}
+        <input id="my-text-field" name="name" type="text" value="{{user}}">
         {{ form.submit(class='button') }}
+        or
+        <a href="{{ url_for('redirect_with_random_user') }}" class="button un-button">Random Sinner</a>
       </form>
     </div>
 
