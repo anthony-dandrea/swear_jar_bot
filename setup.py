@@ -5,7 +5,7 @@ setup(
     name="SwearJar",
 
     # Version number (initial):
-    version="0.1.0",
+    version="0.1.1",
 
     # Application author details:
     author="Anthony D'Andrea, Rod Dennis, Mike Spann, Sean Dennison",

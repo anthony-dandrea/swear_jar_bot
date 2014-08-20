@@ -1,8 +1,9 @@
 // Scaffolds
-@import "scaffolds/normalize";
-@import "scaffolds/fonts";
-@import "scaffolds/vars";
-@import "scaffolds/type";
+@import "scaffolding/normalize";
+@import "scaffolding/vars";
+@import "scaffolding/mixins";
+@import "scaffolding/extends";
+@import "scaffolding/type";
 // Blocks
 @import "blocks/body";
 @import "blocks/header";

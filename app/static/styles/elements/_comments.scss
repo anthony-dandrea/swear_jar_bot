@@ -1,0 +1,17 @@
+.comment {
+  border-bottom: 1px solid $color-gray-light;
+  color: $color-gray;
+  display: table;
+  font-size: $font-size*1.5;
+  font-style: italic;
+  margin-bottom: $unit;
+  padding-bottom: $unit-s;
+  transition: $duration;
+  width: 100%;
+  &:hover {
+    color: $color-black;
+  }
+  p {
+    margin: 0;
+  }
+}

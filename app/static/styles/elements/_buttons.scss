@@ -1,0 +1,22 @@
+.button {
+  background: $color-green;
+  border: none;
+  border-radius: $base-border-radius;
+  color: $color-white;
+  outline: none;
+  padding: $unit-s $unit;
+  transition: $duration;
+  &:hover {
+    background: $color-green-dark;
+  }
+}
+.un-button {
+  color: $color-gray-dark;
+  background: none;
+  padding-left: 0;
+  padding-right: 0;
+  &:hover {
+    background: none;
+    text-decoration: underline;
+  }
+}
