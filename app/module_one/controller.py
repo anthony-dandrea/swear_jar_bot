@@ -2,15 +2,18 @@ import os
 import sqlite3
 import praw
 
+from app import app
+
 from random import choice
 
-from flask import Flask, render_template, request, g, session, redirect, url_for
+from flask import Blueprint, Flask, render_template, request, g, session, redirect, url_for
 from flask.ext.wtf import Form
 from flask.ext import assets
 
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 
+module_one = Blueprint('swear_routes', __name__, template_folder='templates')
 
 ########
 # DB connection, initialization, and closing functions
@@ -28,12 +31,6 @@ def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
-
-@app.teardown_appcontext
-def close_db(error):
-    """Closes the database again at the end of the request."""
-    if hasattr(g, 'sqlite_db'):
-        g.sqlite_db.close()
 
 def get_comments(user):
     db = get_db()
@@ -55,7 +52,7 @@ class SwearJarForm(Form):
 ########
 # Routes
 ########
-@app.route('/', methods=['GET', 'POST'])
+@module_one.route('/', methods=['GET', 'POST'])
 def index():
     # here we want to get the value of user (i.e. ?user=some-value)
     form = NameForm()
@@ -73,14 +70,14 @@ def index():
 
     return render_template('index.html', form=form, user=session.get('name'), comments=session.get('comments'))
 
-@app.route('/user/<user>')
+@module_one.route('/user/<user>')
 def redirect_with_user(user):
     # show the user profile for that user
     session['name'] = user
     session['comments'] = get_comments(user)
     return redirect(url_for('index'))
 
-@app.route('/random')
+@module_one.route('/random')
 def redirect_with_random_user():
     db = get_db()
     # Placeholder SQL statement because I don't know shit
@@ -88,7 +85,4 @@ def redirect_with_random_user():
     user = choice(cur.fetchall())[0]
     session['name'] = user
     session['comments'] = get_comments(user)
-    return redirect(url_for('index'))
-
-if __name__ == '__main__':
-    app.run()
+    return redirect(url_for('swear_routes.index'))
