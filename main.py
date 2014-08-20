@@ -42,7 +42,7 @@ class Bot(object):
                 print "This dude swore: %s" % user
 
                 # Connect to DB
-                con = lite.connect('sinners.db')
+                con = lite.connect('test_sinners.db')
                 #with con:
                 cur = con.cursor()
                 cur.execute('INSERT INTO comments VALUES(NULL,?,?,0)',[user, swear_comment])
