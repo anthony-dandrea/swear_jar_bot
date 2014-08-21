@@ -3,34 +3,34 @@
 
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!-- Critical Styles -->
     <link rel="stylesheet" type="text/css" href="/static/styles/main.css">
-    <script type="text/javascript" src="/static/bower_components/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="/static/components/modernizr/modernizr.js"></script>
     <title>Swear Jar Bot</title>
   </head>
 
   <body>
-    <div class="left-col">
-      <header class="header">
-        <h1 class="title">Swear Jar Bot</h1>
-        <p class="subtitle">
-          A Swear Jar Bot for Reddit&mdash;so watch your fucking mouth.
-        </p>
-        <a href="https://twitter.com/swearjarbot" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @swearjarbot</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </header>
+    <header class="header">
+      <h1 class="title">Swear Jar Bot</h1>
+      <p class="subtitle">
+        A Swear Jar Bot for Reddit&mdash;so watch your fucking mouth.
+      </p>
+      <div class="twitter"><a href="https://twitter.com/swearjarbot" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @swearjarbot</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
+    </header>
+    <div class="col">
       <form method="POST">
         {{ form.hidden_tag() }}
         <label>Enter Username</label>
-        <input id="my-text-field" name="name" type="text" value="{{user}}">
+        <input id="my-text-field" name="name" type="text" value="{{user}}" placeholder="name">
         {{ form.submit(class='button') }}
         or
         <a href="{{ url_for('swear_routes.redirect_with_random_user') }}" class="button un-button">Randomize</a>
       </form>
     </div>
 
-    <div class="right-col">
+    <div class="col omega">
       {% if user %}
         {% for comment in comments %}
           <div class="comment">
@@ -40,6 +40,8 @@
       {% endif %}
     </div>
 
+    <!-- Non-critical Styles -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700,400' rel='stylesheet' type='text/css'>
     <!-- Scripts -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/static/scripts/main.js"></script>

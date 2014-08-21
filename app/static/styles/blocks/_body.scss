@@ -17,24 +17,20 @@ body {
   font-size: $font-size;
   line-height: $line-height;
 }
-.left-col {
+.col {
   @extend %container;
-  background: $color-gray-lighter;
   width: 100%;
-  @include breakpoint ($small) {
+  @include breakpoint($small) {
+    float: left;
     height: 100%;
     left: 0;
     overflow: scroll;
-    position: fixed;
+    position: static;
     top: 0;
-    width: 35%;
+    width: 50%;
   }
 }
-.right-col {
-  @extend %container;
-  width: 100%;
-  @include breakpoint ($small) {
-    float: right;
-    width: 65%;
-  }
+
+.omega {
+  float: right;
 }

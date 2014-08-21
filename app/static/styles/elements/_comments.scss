@@ -1,17 +1,25 @@
 .comment {
-  border-bottom: 1px solid $color-gray-light;
-  color: $color-gray;
-  display: table;
-  font-size: $font-size*1.5;
-  font-style: italic;
-  margin-bottom: $unit;
-  padding-bottom: $unit-s;
-  transition: $duration;
-  width: 100%;
-  &:hover {
-    color: $color-black;
-  }
+  background: $color-gray-lighter;
+  border-radius: $base-border-radius;
+  // color: $color-black;
+  // display: table;
+  // font-size: $font-size;
+  // margin-bottom: $unit;
+  padding: $unit;
+  position: relative;
+  // transition: $duration;
+  // width: 100%;
   p {
     margin: 0;
+  }
+  &:before {
+    bottom: 50%;
+    border-top: $unit solid transparent;
+    border-right: $unit solid $color-gray-lighter;
+    border-bottom: $unit solid transparent;
+    content: "";
+    left: -$unit-s;
+    position: absolute;
+    top: $unit-s;
   }
 }
