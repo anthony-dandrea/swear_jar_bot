@@ -1,19 +1,16 @@
 .comment {
   background: $color-gray-lighter;
   border-radius: $base-border-radius;
-  // color: $color-black;
-  // display: table;
-  // font-size: $font-size;
-  // margin-bottom: $unit;
+  color: $color-black;
+  font-size: $font-size;
+  margin-bottom: $unit;
   padding: $unit;
   position: relative;
-  // transition: $duration;
-  // width: 100%;
+  width: 100%;
   p {
     margin: 0;
   }
   &:before {
-    bottom: 50%;
     border-top: $unit solid transparent;
     border-right: $unit solid $color-gray-lighter;
     border-bottom: $unit solid transparent;
