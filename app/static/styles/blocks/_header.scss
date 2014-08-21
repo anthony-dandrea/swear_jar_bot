@@ -1,9 +1,17 @@
 .header {
+  @extend %container;
   border-bottom: 1px solid $color-gray-light;
   margin-bottom: $unit;
   padding-bottom: $unit;
   text-align: center;
-  @include breakpoint ($small) {
+  @include breakpoint($small) {
     text-align: left;
+  }
+}
+.twitter {
+  @include breakpoint($small) {
+    position: absolute;
+    right: $unit;
+    top: $unit;
   }
 }
