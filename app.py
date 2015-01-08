@@ -6,7 +6,6 @@ from random import choice
 
 from flask import Flask, render_template, request, g, session, redirect, url_for
 from flask.ext.wtf import Form
-from flask.ext import assets
 
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required

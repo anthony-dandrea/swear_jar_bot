@@ -1,0 +1,22 @@
+.comment {
+  background: $color-gray-lighter;
+  border-radius: $base-border-radius;
+  color: $color-black;
+  font-size: $font-size;
+  margin-bottom: $unit;
+  padding: $unit;
+  position: relative;
+  width: 100%;
+  p {
+    margin: 0;
+  }
+  &:before {
+    border-top: $unit solid transparent;
+    border-right: $unit solid $color-gray-lighter;
+    border-bottom: $unit solid transparent;
+    content: "";
+    left: -$unit-s;
+    position: absolute;
+    top: $unit-s;
+  }
+}

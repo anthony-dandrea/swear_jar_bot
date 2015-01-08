@@ -15,11 +15,19 @@ body {
   color: $color;
   font-family: $font-family;
   font-size: $font-size;
-  font-weight: $font-weight;
   line-height: $line-height;
 }
-.container {
-  margin: 0 auto;
-  max-width: 30em;
-  padding: $unit;
+.col {
+  @extend %container;
+  width: 100%;
+  @include breakpoint($small) {
+    float: left;
+    left: 0;
+    position: static;
+    top: 0;
+    width: 50%;
+  }
+}
+.omega {
+  float: right;
 }

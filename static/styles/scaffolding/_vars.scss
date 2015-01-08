@@ -1,0 +1,29 @@
+// Colors
+$color-black: #333333;
+$color-white: #f8f8f8;
+$color-gray: #808080;
+$color-gray-light: lighten($color-gray, 25%);
+$color-gray-lighter: lighten($color-gray, 40%);
+$color-gray-dark: darken($color-gray, 25%);
+$color-red: #D84131;
+$color-red-dark: darken($color-red, 20%);
+$color-green: #27ae60;
+$color-green-dark: darken($color-green, 10%);
+// Scaffolding
+$background: $color-white;
+$color: $color-black;
+$font-family: "open sans", helvetica, arial, sans-serif;
+$font-size: 1em;
+$line-height: 1.5;
+// Unit
+$unit: 1em;
+$unit-s: $unit/2;
+$unit-xs: $unit/4;
+$unit-l: $unit*2;
+// Brekpoints
+$small: 45em;
+// Border
+$base-border: 1px solid $color-gray-light;
+$base-border-radius: 5px;
+// Transitions
+$duration: 0.5s;
