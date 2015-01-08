@@ -10,19 +10,6 @@ from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 
-app = Flask(__name__)
-
-app.config.from_object(__name__)
-
-# Load default config and override config from an environment variable
-app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'test_sinners.db'), # TODO <--- DB name?
-    DEBUG=True,
-    SECRET_KEY='development key', # Do we care?
-    USERNAME='admin',
-    PASSWORD='default'
-))
-app.config.from_envvar('APP_SETTINGS', silent=True) # TODO <-- we care?
 
 ########
 # DB connection, initialization, and closing functions
